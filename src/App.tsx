@@ -24,6 +24,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import authProvider from "./authProvider";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { supabaseClient } from "./utility";
+import { ProjectList } from "./pages/projects";
 
 
 
@@ -46,18 +47,34 @@ function App() {
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
               }}
+              resources={[
+                {
+                  name: "projects",
+                  list: "/projects",
+                  // create: "/blog-posts/create",
+                  // edit: "/blog-posts/edit/:id",
+                  // show: "/blog-posts/show/:id",
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+              ]}
             >
               <Routes>
               <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <ThemedLayoutV2 Header={() => <Header sticky />}>
+                      {/* <ThemedLayoutV2 Header={() => <Header sticky />}> */}
+                      <Header sticky />
                         <Outlet />
-                      </ThemedLayoutV2>
+                      {/* </ThemedLayoutV2> */}
                     </Authenticated>
                   }
                 >
-                {/* <Route index element={<WelcomePage />} /> */}
+                   <Route index
+              element={<NavigateToResource resource="projects" />}
+            />
+                <Route path="/projects" index element={<ProjectList />} />
                 
                 <Route path="*" element={<ErrorComponent />} />
                 </Route>
@@ -75,8 +92,8 @@ function App() {
                         type="login"
                         formProps={{
                           defaultValues: {
-                            email: "info@refine.dev",
-                            password: "refine-supabase",
+                            email: "shwetakale144@gmail.com",
+                            password: "Shweta123@",
                           },
                         }}
                       />
