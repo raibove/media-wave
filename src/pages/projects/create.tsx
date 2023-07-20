@@ -34,6 +34,7 @@ export const RequestCreate : React.FC<RequestProp> = ({isModalOpen, handleModalC
     try {
       await onFinish({ ...values, user_id: user!.id });
       handleModalClose();
+      setValue("name", "");
     } catch (error) {
       // Handle error
     }

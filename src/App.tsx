@@ -26,6 +26,7 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { supabaseClient } from "./utility";
 import { ProjectList } from "./pages/projects";
 import { RequestCreate } from "./pages/projects/create";
+import { ProjectEdit } from "./pages/projects/edit";
 
 
 
@@ -53,6 +54,7 @@ function App() {
                   name: "projects",
                   list: "/projects",
                   create: "/projects?create=true",
+                  edit: "/projects/edit/:id",
                   // create: "/blog-posts/create",
                   // edit: "/blog-posts/edit/:id",
                   // show: "/blog-posts/show/:id",
@@ -77,6 +79,7 @@ function App() {
               element={<NavigateToResource resource="projects" />}
             />
                 <Route path="/projects" index element={<ProjectList />} />
+                <Route path="/projects/edit/:id" index element={<ProjectEdit />} />
                 <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route

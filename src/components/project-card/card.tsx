@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import { IRequest } from "../../pages/projects/list";
 import { Link } from "react-router-dom";
 import { DeleteButton, EditButton, ShowButton } from "@refinedev/mui";
-import RsvpIcon from "@mui/icons-material/Rsvp";
 import MuiLink from "@mui/material/Link";
 
 interface Props {
@@ -17,10 +16,10 @@ interface Props {
 
 export default function ProjectListCard({ project }: Props) {
   return (
-    <Card elevation={3} sx={{ flex: 1, maxWidth: 350, }}>
+    <Card elevation={3} sx={{ flex: 1, maxWidth: 350, minHeight: 150, minWidth: 250}}>
     <Stack justifyContent="space-between" height="100%">
       <Box p={2}>
-        <MuiLink component={Link} to={`/editor/${project.id}`} underline="hover">
+        <MuiLink component={Link} to={`/projects/edit/${project.id}`} underline="hover">
           <Typography
             color="black"
             fontWeight="bold"
