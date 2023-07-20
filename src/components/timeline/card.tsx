@@ -8,7 +8,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { Box, Button, Grid, TextField } from "@mui/material";
 
-export const TimelineCard = () => {
+export const TimelineCard = ({frame}: any) => {
     return (
         <Card sx={{ display: 'flex', minWidth: 350, marginBottom:5 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
@@ -18,6 +18,7 @@ export const TimelineCard = () => {
                         multiline
                         defaultValue="Default Value"
                         variant="filled"
+                        value={frame.text}
                         sx={{ml:2, mr:2, mt: 2}}
                     />
                 {/* </CardContent> */}
