@@ -8,12 +8,7 @@ import { useGetIdentity } from "@refinedev/core";
 import { RequestCreate } from "./create";
 
 import { useLocation, useNavigate } from "react-router-dom";
-export interface IRequest {
-    id: string;
-    name: string;
-    created_at: string;
-    user_id: string;
-}
+import { IRequest } from "../../utility/types";
 
 export const ProjectList: React.FC<IResourceComponentsProps> = () => {
   const { data: user } = useGetIdentity<IUser>();

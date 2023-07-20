@@ -65,22 +65,22 @@ function App() {
               ]}
             >
               <Routes>
-              <Route
+                <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
                       {/* <ThemedLayoutV2 Header={() => <Header sticky />}> */}
                       <Header sticky />
-                        <Outlet />
+                      <Outlet />
                       {/* </ThemedLayoutV2> */}
                     </Authenticated>
                   }
                 >
-                   <Route index
-              element={<NavigateToResource resource="projects" />}
-            />
-                <Route path="/projects" index element={<ProjectList />} />
-                <Route path="/projects/edit/:id" index element={<ProjectEdit />} />
-                <Route path="*" element={<ErrorComponent />} />
+                  <Route index
+                    element={<NavigateToResource resource="projects" />}
+                  />
+                  <Route path="/projects" index element={<ProjectList />} />
+                  <Route path="/projects/edit/:id" index element={<ProjectEdit />} />
+                  <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
                   element={

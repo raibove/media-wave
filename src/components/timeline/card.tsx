@@ -1,27 +1,26 @@
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import { FrameResponse } from '../../utility/types';
 
-export const TimelineCard = ({frame}: any) => {
+interface TimelineCardProps {
+    frame: FrameResponse;
+}
+
+export const TimelineCard = ({ frame }: TimelineCardProps) => {
     return (
-        <Card sx={{ display: 'flex', minWidth: 350, marginBottom:5 }}>
+        <Card sx={{ display: 'flex', minWidth: 350, marginBottom: 5 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                {/* <CardContent> */}
-                    <TextField
-                        id="standard-multiline-static"
-                        multiline
-                        defaultValue="Default Value"
-                        variant="filled"
-                        value={frame.text}
-                        sx={{ml:2, mr:2, mt: 2}}
-                    />
-                {/* </CardContent> */}
+                <TextField
+                    id="standard-multiline-static"
+                    multiline
+                    variant="filled"
+                    value={frame.text}
+                    sx={{ ml: 2, mr: 2, mt: 2 }}
+                />
                 <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton aria-label="previous">
                         <SkipNextIcon />

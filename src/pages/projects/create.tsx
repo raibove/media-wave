@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
   Button,
-  Modal, // Import the Modal component from Material-UI
+  Modal, 
 } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
 import { useGetIdentity } from "@refinedev/core";
@@ -32,7 +32,7 @@ export const RequestCreate : React.FC<RequestProp> = ({isModalOpen, handleModalC
 
   const handleCreateRequest = async (values: FieldValues) => {
     try {
-      await onFinish({ ...values, user_id: user!.id });
+      await onFinish({ ...values, user_id: user?.id });
       handleModalClose();
       setValue("name", "");
     } catch (error) {
