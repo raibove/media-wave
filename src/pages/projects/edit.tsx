@@ -1,4 +1,4 @@
-import { Edit } from "@refinedev/mui";
+import { Edit, EditButtonProps } from "@refinedev/mui";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
 import { IResourceComponentsProps, useGetIdentity, useList } from "@refinedev/core";
@@ -14,8 +14,12 @@ import TimelineContent, { timelineContentClasses } from '@mui/lab/TimelineConten
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { TimelineCard } from "../../components/timeline/card";
+import { useUpdate } from "@refinedev/core";
 
 export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
+    
+const { mutate } = useUpdate();
+
     const {
         saveButtonProps,
         refineCore: { queryResult },
@@ -42,6 +46,21 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
     useEffect(() => {
         console.log(projectsData)
     }, [projectsData])
+
+    const handleAddNewFrame = ()=>{
+        mutate({
+            resource: "projects",
+            values: {
+               ...projectsData,
+               config: {
+                text: 'default',
+                font_size: 10,
+                alignment: 'center'
+               }
+            },
+            id: projectsData?.id || 1,
+        });
+    }
     return (
         <Edit saveButtonProps={saveButtonProps}>
             <Box
@@ -65,7 +84,6 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                 />
                 <Grid container spacing={3}>
                     <Grid item xs={4}>
-
                         <Timeline
                             sx={{
                                 [`& .${timelineContentClasses.root}`]: {
@@ -96,7 +114,7 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                                     <TimelineCard/>
                                 </TimelineContent>
                             </TimelineItem>
-                            <Button>Add new frame</Button>
+                            <Button onClick={handleAddNewFrame}>Add new frame</Button>
                         </Timeline>
                     </Grid>
                     <Grid item xs={8}>
