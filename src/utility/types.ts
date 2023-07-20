@@ -16,4 +16,6 @@ export interface FrameResponse {
     project_id: number;
     text: string;
     text_color: string;
+    frame_order: number;
+    duration: number;
 }

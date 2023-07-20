@@ -28,7 +28,7 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
 
     const projectsData = queryResult?.data?.data;
 
-    const { data } = useList<IRequest>({
+    const { data } = useList<FrameResponse>({
         resource: "frames",
         filters: [
             {
@@ -37,26 +37,39 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                 value: projectsData?.id,
             }
         ],
+        sorters: [
+            {
+                field: "frame_order",
+                order: "asc",
+            },
+        ],
     });
 
-    const framesData = data?.data as unknown as FrameResponse[]
+    const framesData = data?.data as FrameResponse[]
+
+    const getDefaultFrameValue = () => {
+        const newFrame = {
+            text: 'default',
+            font_size: 10,
+            alignment: 'center',
+            project_id: projectsData?.id,
+            frame_order: framesData.length + 1,
+            duration: 5,
+        }
+        return newFrame;
+    }
 
     const handleAddNewFrame = () => {
         createFrame.mutate({
             resource: "frames",
-            values: {
-                text: 'default',
-                font_size: 10,
-                alignment: 'center',
-                project_id: projectsData?.id
-            }
+            values: getDefaultFrameValue()
         });
     }
 
-    const handleUpdateFrame = (frameId: string, key: string, value: any)=>{
-        const newFrameValue = {...framesData.find((frame)=>frame.id===frameId)};
+    const handleUpdateFrame = (frameId: string, key: string, value: any) => {
+        const newFrameValue = { ...framesData.find((frame) => frame.id === frameId) };
         (newFrameValue as any)[key] = value;
-        
+
         updateFrame.mutate({
             resource: "frames",
             values: {
@@ -66,7 +79,7 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
         });
     }
 
-    const handleDeleteFrame = (frameId: string)=>{
+    const handleDeleteFrame = (frameId: string) => {
         deleteFrame.mutate({
             resource: "frames",
             id: frameId,
@@ -103,15 +116,15 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                         >
                             {framesData && framesData.map((frame) => (
                                 <TimelineItem key={frame.id}>
-                                    <TimelineOppositeContent color="textSecondary">
-                                        09:30 am
+                                    <TimelineOppositeContent color="textSecondary" minWidth={40}>
+                                        {frame.duration}s
                                     </TimelineOppositeContent>
                                     <TimelineSeparator>
                                         <TimelineDot />
                                         <TimelineConnector />
                                     </TimelineSeparator>
                                     <TimelineContent>
-                                        <TimelineCard frame={frame} handleUpdateFrame={handleUpdateFrame} handleDeleteFrame={handleDeleteFrame}/>
+                                        <TimelineCard frame={frame} handleUpdateFrame={handleUpdateFrame} handleDeleteFrame={handleDeleteFrame} />
                                     </TimelineContent>
                                 </TimelineItem>
                             ))}
