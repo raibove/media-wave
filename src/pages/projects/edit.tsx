@@ -12,7 +12,8 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { TimelineCard } from "../../components/timeline/card";
 import { FrameResponse, IRequest } from "../../utility/types";
-
+import { Player } from "@remotion/player";
+import { MyComposition } from "../../remotion/composition/MyComposition";
 
 export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
     const createFrame = useCreate();
@@ -131,9 +132,16 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                             <Button onClick={handleAddNewFrame}>Add new frame</Button>
                         </Timeline>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={8} justifyContent='center' display='flex'>
                         <Box>
-
+                            <Player
+                                component={MyComposition}
+                                durationInFrames={12000}
+                                compositionWidth={620}
+                                compositionHeight={480}
+                                fps={30}
+                                controls
+                            />
                         </Box>
                     </Grid>
                 </Grid>
