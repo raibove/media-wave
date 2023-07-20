@@ -25,6 +25,7 @@ import authProvider from "./authProvider";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { supabaseClient } from "./utility";
 import { ProjectList } from "./pages/projects";
+import { RequestCreate } from "./pages/projects/create";
 
 
 
@@ -51,6 +52,7 @@ function App() {
                 {
                   name: "projects",
                   list: "/projects",
+                  // create: "/projects/create",
                   // create: "/blog-posts/create",
                   // edit: "/blog-posts/edit/:id",
                   // show: "/blog-posts/show/:id",
@@ -75,7 +77,6 @@ function App() {
               element={<NavigateToResource resource="projects" />}
             />
                 <Route path="/projects" index element={<ProjectList />} />
-                
                 <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
@@ -96,6 +97,7 @@ function App() {
                             password: "Shweta123@",
                           },
                         }}
+                        title={<h3>Media Wave</h3>}
                       />
                     }
                   />
