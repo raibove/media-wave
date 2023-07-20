@@ -36,8 +36,8 @@ export const TimelineCard = ({ frame, handleUpdateFrame, handleDeleteFrame }: Ti
                     <IconButton aria-label="play/pause">
                         <PlayArrowIcon sx={{ height: 38, width: 38 }} />
                     </IconButton>
-                    <IconButton aria-label="next">
-                        <DeleteIcon color='error' onClick={()=>handleDeleteFrame(frame.id)}/>
+                    <IconButton aria-label="delete" onClick={()=>handleDeleteFrame(frame.id)}>
+                        <DeleteIcon color='error'/>
                     </IconButton>
                 </Box>
             </Box>

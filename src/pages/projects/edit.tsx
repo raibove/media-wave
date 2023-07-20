@@ -86,6 +86,16 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
             id: frameId,
         });
     }
+
+    const getVideoDutation = (): number => {
+        let duration = 5;
+        if (framesData) {
+            framesData.forEach((frame) => {
+                duration += frame.duration;
+            })
+        }
+        return duration;
+    }
     return (
         <Edit saveButtonProps={saveButtonProps}>
             <Box
@@ -132,13 +142,13 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                             <Button onClick={handleAddNewFrame}>Add new frame</Button>
                         </Timeline>
                     </Grid>
-                    <Grid item xs={8} justifyContent='center' display='flex'>
+                    <Grid item xs={8} justifyContent='center' display='flex' mt={10}>
                         <Box>
                             <Player
                                 component={MyComposition}
-                                durationInFrames={12000}
+                                durationInFrames={getVideoDutation()}
                                 compositionWidth={620}
-                                compositionHeight={480}
+                                compositionHeight={280}
                                 fps={30}
                                 controls
                             />

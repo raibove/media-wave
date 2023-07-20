@@ -5,10 +5,10 @@ import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { IRequest } from "../../pages/projects/list";
 import { Link } from "react-router-dom";
 import { DeleteButton, EditButton, ShowButton } from "@refinedev/mui";
 import MuiLink from "@mui/material/Link";
+import { IRequest } from "../../utility/types";
 
 interface Props {
   project: IRequest;
