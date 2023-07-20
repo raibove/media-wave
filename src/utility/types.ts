@@ -6,6 +6,7 @@ export interface IRequest {
 }
 
 export interface FrameResponse {
+    from: any;
     id: string;
     created_at: string;
     alignment:string;

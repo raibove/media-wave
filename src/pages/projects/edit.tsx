@@ -96,6 +96,17 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
         }
         return duration;
     }
+
+    const getVideoContent = () => {
+        const content: FrameResponse[] = []
+        if (framesData) {
+            framesData.forEach((frame) => {
+                content.push(frame);
+            })
+        }
+        return content;
+    }
+
     return (
         <Edit saveButtonProps={saveButtonProps}>
             <Box
@@ -149,8 +160,9 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                                 durationInFrames={getVideoDutation()}
                                 compositionWidth={620}
                                 compositionHeight={280}
-                                fps={30}
+                                fps={10}
                                 controls
+                                inputProps={{data:getVideoContent()}}
                             />
                         </Box>
                     </Grid>
