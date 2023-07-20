@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CreateButton, List } from "@refinedev/mui";
 import { IResourceComponentsProps, useList } from "@refinedev/core";
 import { Box, Typography, Stack, CircularProgress } from "@mui/material";
@@ -7,6 +7,7 @@ import { IUser } from "../../components/header";
 import { useGetIdentity } from "@refinedev/core";
 import { RequestCreate } from "./create";
 
+import { useLocation, useNavigate } from "react-router-dom";
 export interface IRequest {
     id: string;
     name: string;
@@ -42,7 +43,22 @@ export const ProjectList: React.FC<IResourceComponentsProps> = () => {
 
   const handleModalClose = () => {
     setModalOpen(false);
+    const params = new URLSearchParams(location.search);
+    params.delete("create");
+    navigate({ search: params.toString() });
   };
+
+ 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const createParam = params.get("create");
+    if (createParam === "true") {
+      setModalOpen(true);
+    } 
+  }, [location.search]);
 
   return (
     <>
