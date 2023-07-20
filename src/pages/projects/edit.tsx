@@ -1,7 +1,7 @@
 import { Edit } from "@refinedev/mui";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
-import { IResourceComponentsProps, useCreate, useList } from "@refinedev/core";
+import { IResourceComponentsProps, useCreate, useList, useUpdate } from "@refinedev/core";
 
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -16,6 +16,7 @@ import { FrameResponse, IRequest } from "../../utility/types";
 
 export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
     const createFrame = useCreate();
+    const updateFrame = useUpdate();
 
     const {
         saveButtonProps,
@@ -48,6 +49,20 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                 alignment: 'center',
                 project_id: projectsData?.id
             }
+        });
+    }
+
+    const handleUpdateFrame = (frameId: string, key: string, value: any)=>{
+        console.log(key)
+        const newFrameValue = {...framesData.find((frame)=>frame.id===frameId)};
+        (newFrameValue as any)[key] = value;
+        console.log(newFrameValue)
+        updateFrame.mutate({
+            resource: "frames",
+            values: {
+                ...newFrameValue
+            },
+            id: frameId
         });
     }
     return (
@@ -89,7 +104,7 @@ export const ProjectEdit: React.FC<IResourceComponentsProps> = () => {
                                         <TimelineConnector />
                                     </TimelineSeparator>
                                     <TimelineContent>
-                                        <TimelineCard frame={frame} />
+                                        <TimelineCard frame={frame} handleUpdateFrame={handleUpdateFrame}/>
                                     </TimelineContent>
                                 </TimelineItem>
                             ))}

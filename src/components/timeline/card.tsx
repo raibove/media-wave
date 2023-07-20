@@ -5,12 +5,18 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { Box, TextField } from "@mui/material";
 import { FrameResponse } from '../../utility/types';
+import { debounce } from 'lodash';
+import { useState } from 'react';
 
 interface TimelineCardProps {
     frame: FrameResponse;
+    handleUpdateFrame: (frameId: string, key: string, value: any)=> void;
 }
 
-export const TimelineCard = ({ frame }: TimelineCardProps) => {
+export const TimelineCard = ({ frame, handleUpdateFrame }: TimelineCardProps) => {
+    const [text, setText] = useState(frame.text);
+    const debouncedHandleUpdateFrame = debounce(handleUpdateFrame, 5500);
+
     return (
         <Card sx={{ display: 'flex', minWidth: 350, marginBottom: 5 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
@@ -18,8 +24,9 @@ export const TimelineCard = ({ frame }: TimelineCardProps) => {
                     id="standard-multiline-static"
                     multiline
                     variant="filled"
-                    value={frame.text}
+                    value={text}
                     sx={{ ml: 2, mr: 2, mt: 2 }}
+                    onChange={(e) => {setText(e.target.value); debouncedHandleUpdateFrame(frame.id, 'text', e.target.value)}}
                 />
                 <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <IconButton aria-label="previous">
